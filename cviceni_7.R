@@ -37,7 +37,10 @@ BreakPointSort <- function(vektor){
   
   while (index < length(permutacni_vektor)){
     vektor_indikaci <- Vzestupne(permutacni_vektor)
-    
+    #doplneni kolize
+    if (sum(vektor_indikaci) == length(permutacni_vektor)){
+      permutacni_vektor <- c(permutacni_vektor[1:(index-1)],rev(permutacni_vektor[index:(length(permutacni_vektor)-1)]),permutacni_vektor[length(permutacni_vektor)])
+    }else{
     nejmensi_sestupny <- min(permutacni_vektor[vektor_indikaci == 0])
     index_nejmensi_sestupny <- which(permutacni_vektor == nejmensi_sestupny)
   
@@ -45,6 +48,7 @@ BreakPointSort <- function(vektor){
     
     #prepis stopujiciho indexu
     index <- NajdiSetridene(permutacni_vektor)
+    }
   }
   vektor <- permutacni_vektor[2:(length(permutacni_vektor)-1)]
   return(vektor)
