@@ -30,6 +30,22 @@ Vzestupne <- function(permutacni_vektor){
 
 
 
-BreakPointSort <- function(){
+BreakPointSort <- function(vektor){
   
+  permutacni_vektor <- c(0,vektor,length(vektor)+1)
+  index <- NajdiSetridene(permutacni_vektor)
+  
+  while (index < length(permutacni_vektor)){
+    vektor_indikaci <- Vzestupne(permutacni_vektor)
+    
+    nejmensi_sestupny <- min(permutacni_vektor[vektor_indikaci == 0])
+    index_nejmensi_sestupny <- which(permutacni_vektor == nejmensi_sestupny)
+  
+    permutacni_vektor <- c(permutacni_vektor[1:index-1],rev(permutacni_vektor[index:index_nejmensi_sestupny]),permutacni_vektor[(index_nejmensi_sestupny+1):length(permutacni_vektor)])
+    
+    #prepis stopujiciho indexu
+    index <- NajdiSetridene(permutacni_vektor)
+  }
+  vektor <- permutacni_vektor[2:(length(permutacni_vektor)-1)]
+  return(vektor)
 }
